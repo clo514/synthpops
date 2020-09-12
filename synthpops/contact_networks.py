@@ -61,7 +61,7 @@ def generate_fixed_household_size_fixed_pop_size(N, Nhomes, hh_size_distr):
     #check difference between generated population size and actual population size. 
     people_to_add_or_remove = totalpop - N
 
-    print("\n" + str(totalpop) + " people and " + str(num_households) + " households initially created. Off by " + str(people_to_add_or_remove))
+    #print("\n" + str(totalpop) + " people and " + str(num_households) + " households initially created. Off by " + str(people_to_add_or_remove))
 
     # create lists of household sizes and respective probabilities from hh distribution
     hh_size_keys = [k for k in hh_size_distr]
@@ -73,7 +73,7 @@ def generate_fixed_household_size_fixed_pop_size(N, Nhomes, hh_size_distr):
     #if not enough people were created
     if people_to_add_or_remove < 0:
         people_to_add = people_to_add_or_remove * -1
-        print("Initial household distribution:" + str(hh_sizes))
+        #print("Initial household distribution:" + str(hh_sizes))
 
         #list with household sizes that should not be increased
         temp = [1]
@@ -97,7 +97,7 @@ def generate_fixed_household_size_fixed_pop_size(N, Nhomes, hh_size_distr):
     # if there are too many people
     elif people_to_add_or_remove > 0:
         people_to_remove = people_to_add_or_remove
-        print("Initial household distribution: " + str(hh_sizes))
+        #print("Initial household distribution: " + str(hh_sizes))
 
         #list with household sizes that should not be increased
         temp = [len(hh_sizes)]
@@ -116,7 +116,7 @@ def generate_fixed_household_size_fixed_pop_size(N, Nhomes, hh_size_distr):
             hh_sizes[j - 1] = hh_sizes[j - 1] + 1
             hh_sizes[j] = hh_sizes[j] - 1
 
-    print("Final household distribution:  " + str(hh_sizes))
+    #print("Final household distribution:  " + str(hh_sizes))
     hh_sizes = hh_sizes.astype(int) 
 
     #testing purposes only
@@ -125,7 +125,7 @@ def generate_fixed_household_size_fixed_pop_size(N, Nhomes, hh_size_distr):
     for i in range(0, len(hh_sizes)):
         totalpop = totalpop + hh_sizes[i] * (i + 1)
         num_households = num_households + hh_sizes[i]
-    print(str(totalpop) + " people and " + str(num_households) + " households created after reshuffling.\n")
+    #print(str(totalpop) + " people and " + str(num_households) + " households created after reshuffling.\n")
     return hh_sizes
 
 
@@ -720,7 +720,6 @@ def generate_workplace_sizes(workplace_size_distr_by_bracket, workplace_size_bra
 
     sorted_brackets = sorted(workplace_size_brackets.keys())
     prob_by_sorted_brackets = [workplace_size_distr_by_bracket[b] for b in sorted_brackets]
-    print(prob_by_sorted_brackets)
 
     workplace_sizes = []
     count_num_workplaces = num_workplaces
@@ -730,11 +729,11 @@ def generate_workplace_sizes(workplace_size_distr_by_bracket, workplace_size_bra
         size = np.random.choice(workplace_size_brackets[size_bracket])
         nworkers -= size
         workplace_sizes.append(size)
-        count_num_workplaces -= 1
+        #count_num_workplaces -= 1
     if nworkers < 0:
         workplace_sizes[-1] = workplace_sizes[-1] + nworkers
-    print(str(len(workplace_sizes)) + " workplaces initially created and " + str(nworkers) + " people leftover.")
     """
+    print(str(len(workplace_sizes)) + " workplaces initially created and " + str(nworkers) + " people leftover.")
     # if overflow of workers, add one to each workplace
     if nworkers > 0:
         for i in range(nworkers):
@@ -742,8 +741,6 @@ def generate_workplace_sizes(workplace_size_distr_by_bracket, workplace_size_bra
     # if too many empty workplaces, add people to them
     elif count_num_workplaces > 0:
     """
-        
-
     np.random.shuffle(workplace_sizes)
 
     return workplace_sizes
